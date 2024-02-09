@@ -16,5 +16,7 @@ namespace AnimalShelterApi.Models
     public int Age { get; set; }
     [Required]
     public string Gender { get; set; }
+    [Required]
+    public virtual ApplicationUser User { get; set; }
   }
 }

@@ -16,16 +16,26 @@ namespace AnimalShelterApi
       Configuration = configuration;
     }
 
+    public Startup(IWebHostEnvironment env)
+    {
+      IConfigurationBuilder builder = new ConfigurationBuilder()
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile("appsettings.json");
+      Configuration = builder.Build();
+    }
+
     public IConfiguration Configuration { get; }
 
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddMvc();
       services.AddDbContext<AnimalShelterApiContext>(opt => opt.UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
       services.AddControllers();
       services.AddSwaggerGen(c =>
       {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "CretaceousApi", Version = "v1" });
       });
+      services.AddSwaggerGenNewtonsoftSupport(); // explicit opt-in - needs to be placed after AddSwaggerGen()
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -33,8 +43,7 @@ namespace AnimalShelterApi
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CretaceousApi v1"));
+        //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CretaceousApi v1"));
       }
 
       // app.UseHttpsRedirection();
@@ -47,6 +56,13 @@ namespace AnimalShelterApi
       {
         endpoints.MapControllers();
       });
+
+      // app.MapEndpoints(endpoints =>
+      // {
+      //   endpoints.MapSwagger();
+      // });
+
+      app.UseSwagger();
     }
   }
 }

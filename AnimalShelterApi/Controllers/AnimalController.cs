@@ -29,7 +29,7 @@ namespace AnimalShelterApi.Controllers
 
     // GET api/animal
     [HttpGet]
-    public async Task<List<Animal>> Get(string name, int animalId, string species, string gender, int age)
+    public async Task<List<Animal>> Get([FromQuery]string name, [FromQuery]int animalId, [FromQuery]string species, [FromQuery]string gender, [FromQuery]int age)
     {
       IQueryable<Animal> query = _db.Animals.AsQueryable();
 
@@ -63,7 +63,7 @@ namespace AnimalShelterApi.Controllers
 
     // POST api/animals
     [HttpPost]
-    public async Task<ActionResult> Post(Animal animal)
+    public async Task<ActionResult> Post([FromBody]Animal animal)
     {
       _db.Animals.Add(animal);
       await _db.SaveChangesAsync();
@@ -73,7 +73,7 @@ namespace AnimalShelterApi.Controllers
 
     // GET api/Animals/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Animal>> GetAnimal(int id)
+    public async Task<ActionResult<Animal>> GetAnimal([FromQuery]int id)
     {
       Animal animal = await _db.Animals.FindAsync(id);
 
@@ -87,7 +87,7 @@ namespace AnimalShelterApi.Controllers
 
     // PUT: api/Animals/5
     [HttpPut("{id}")]
-    public async Task<ActionResult> Put(int id, Animal animal)
+    public async Task<ActionResult> Put([FromBody]int id, [FromBody]Animal animal)
     {
       if (id != animal.AnimalId)
       {
@@ -116,7 +116,7 @@ namespace AnimalShelterApi.Controllers
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteAnimal(int id)
+    public async Task<ActionResult> DeleteAnimal([FromQuery]int id)
     {
       Animal animal = await _db.Animals.FindAsync(id);
       if (animal == null)
