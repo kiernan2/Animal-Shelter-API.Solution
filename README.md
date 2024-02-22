@@ -15,6 +15,7 @@
 
 * You can Create animals(cats and dogs)
 * Contains places for name age and gender of animals
+* Attempted and failed to add authentication (see other branch)
 
 ## Setup/Installation Requirements
 
@@ -31,7 +32,27 @@
 4. Enter `dotnet ef database update` to build the appropriate database
 5. Open a terminal and cd to `(Wherever you put the file)/Animal-Shelter-API.Solution/AnimalShelter`
 6. Enter dotnet run
-7. Open a browser Go to `http://localhost:5000`
+7. Send api calls to `http://localhost:5001`
+
+## Api Endpoints
+
+1. Request Format
+```
+  GET: https://localhost:5001/api/animal/
+  POST: https://localhost:5001/api/animal/
+  GET: https://localhost:5001/api/animal/5
+  PUT: https://localhost:5001/api/animal/5
+  DELETE: https://localhost:5001/api/animal/?animalId="TARGET-ID-HERE"
+```
+
+2. Query Params
+```
+  animalId: The ID for specific entry
+  name: The name assigned to the animal
+  species: Species of the animal (designed for 'cat' or 'dog')
+  gender: The gender of the animal in question(As it is nonhuman we are also referring to biological sex)
+  age: Age of the animal (presumably in human years but you can do it you want)
+```
 
 ## Known Bugs
 
@@ -39,7 +60,7 @@
 
 ## License
 
-MIT 2023
+MIT 2024
 
 ## Contact Information
 Kiernan1994@gmail.com
