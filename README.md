@@ -38,11 +38,11 @@
 
 1. Request Format
 ```
-  GET: https://localhost:5001/api/animal/
-  POST: https://localhost:5001/api/animal/
-  GET: https://localhost:5001/api/animal/5
-  PUT: https://localhost:5001/api/animal/5
-  DELETE: https://localhost:5001/api/animal/?animalId="TARGET-ID-HERE"
+  GET: /api/animal/
+  POST: /api/animal/
+  GET: /api/animal/[TARGET-ID-HERE]
+  PUT: /api/animal/[TARGET-ID-HERE]
+  DELETE: /api/animal/?animalId="TARGET-ID-HERE"
 ```
 
 2. Query Params
